@@ -1,0 +1,70 @@
+<div>
+  <div style="margin-bottom: 32px;" class="text-end"><a class="btn btn-success" routerLink="/abonnes/create" >Ajouter un Abonné</a></div>
+
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel">Suppression</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" id="close-modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Voulez vous vraiment supprimer l'abonné  {{abonne?.nom}}??
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success"  data-bs-dismiss="modal">Non</button>
+        <button  type="button" class="btn btn-danger" (click)="onDelete()"  >Oui</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div>
+
+    <table  class="table table-bordered table-hover">
+      <thead>
+          <tr>
+              <th scope="col">id</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Prenom</th>
+              <th scope="col">Pays</th>
+              <th scope="col">Ville</th>
+              <th scope="col">Code Postal</th>
+              <th scope="col">Proffession</th>
+              <th scope="col">Email</th>
+              <th scope="col">Téléphone</th>
+              <th scope="col">Sexe</th>
+              <th scope="col">Age</th>
+              <th scope="col">Motivation</th>
+              <th scope="col">Actions</th>
+
+          </tr>
+      </thead>
+      <tbody>
+                <tr *ngFor="let abonne of abonnes$|async">
+                  <td>{{abonne.id}}</td>
+                  <td>{{abonne.nom}}</td>
+                  <td>{{abonne.prenom}}</td>
+                  <td>{{abonne.pays}}</td>
+                  <td>{{abonne.ville}}</td>
+                  <td>{{abonne.code_postal}}</td>
+                  <td>{{abonne.proffession}}</td>
+                  <td>{{abonne.email}}</td>
+                  <td>{{abonne.telephone}}</td>
+                  <td>
+                    <div *ngIf="abonne.sexe==='m'" class="badge bg-secondary">Masculin</div>
+                    <div *ngIf="abonne.sexe==='f'" class="badge bg-info">Feminin</div>
+                  </td>
+                  <td>{{abonne.age}}</td>
+                  <td>{{abonne.region.label}}</td>
+                  </td>
+                  <td class="d-flex">
+                      <a  class="btn btn-dark me-2" (click)="onUpdate(participant.id)" >Modifier</a>
+                      <button (click)="onPreDelete(participant)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal">Supprimer</button>
+                  </td>
+            </tr>
+      </tbody>
+  </table>
+  </div>
+</div>
